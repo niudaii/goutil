@@ -91,7 +91,7 @@ func (c *Consumer) StartConsume() {
 			}
 		}
 		c.groups = append(c.groups, group)
-		c.consume(group, binding)
+		go c.consume(group, binding)
 	}
 }
 

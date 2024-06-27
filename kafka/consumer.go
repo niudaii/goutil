@@ -26,6 +26,7 @@ func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 	saramaConfig := sarama.NewConfig()
 	saramaConfig.Consumer.Offsets.Initial = sarama.OffsetNewest
 	saramaConfig.Consumer.Return.Errors = true
+	saramaConfig.Consumer.Group.Rebalance.Timeout = 3 * time.Minute
 	if config.Kerberos.KeytabPath != "" {
 		saramaConfig.Net.SASL.Mechanism = sarama.SASLTypeGSSAPI
 		saramaConfig.Net.SASL.GSSAPI.AuthType = sarama.KRB5_KEYTAB_AUTH
@@ -115,11 +116,6 @@ func (c *Consumer) consume(group sarama.ConsumerGroup, bingding HandlerBinding) 
 		topicName: bingding.TopicName,
 		handler:   handler,
 	}
-	go func() {
-		for err := range group.Errors() {
-			c.logger.Infof("group consume err: %v", err)
-		}
-	}()
 	err := group.Consume(context.Background(), []string{bingding.TopicName}, consumerGroupHandler)
 	if err != nil {
 		c.logger.Errorf("group consume err: %v", err)

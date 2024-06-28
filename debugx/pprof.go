@@ -4,6 +4,7 @@ import (
 	"github.com/zp857/goutil/threading"
 	"go.uber.org/zap"
 	"net/http"
+	_ "net/http/pprof"
 )
 
 type Config struct {

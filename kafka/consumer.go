@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 	v1 "github.com/zp857/goutil/constants/v1"
 	"go.uber.org/zap"
+	"net"
 	"time"
 )
 
@@ -29,6 +30,7 @@ func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 	saramaConfig.Net.ReadTimeout = 90 * time.Second
 	saramaConfig.Net.WriteTimeout = 90 * time.Second
 	saramaConfig.Consumer.Return.Errors = true
+	saramaConfig.Consumer.Group.Session.Timeout = 3 * time.Minute
 	saramaConfig.Consumer.Group.Rebalance.Timeout = 3 * time.Minute
 	if config.Kerberos.KeytabPath != "" {
 		saramaConfig.Net.SASL.Mechanism = sarama.SASLTypeGSSAPI
@@ -40,8 +42,15 @@ func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 		saramaConfig.Net.SASL.GSSAPI.Realm = config.Kerberos.Realm
 		saramaConfig.Net.SASL.GSSAPI.ServiceName = config.Kerberos.ServiceName
 		saramaConfig.Net.SASL.GSSAPI.Username = config.Kerberos.Username
-		saramaConfig.Net.SASL.GSSAPI.BuildSpn = func(serviceName, host string) string {
-			return saramaConfig.Net.SASL.GSSAPI.Username
+		saramaConfig.Net.SASL.GSSAPI.BuildSpn = func(serverName, host string) string {
+			ret := fmt.Sprintf("%s/%s", serverName, host)
+			domain, err := net.LookupAddr(host)
+			if err == nil {
+				if len(domain) > 0 {
+					ret = fmt.Sprintf("%s/%s", serverName, domain[0])
+				}
+			}
+			return ret
 		}
 	}
 	return &Consumer{

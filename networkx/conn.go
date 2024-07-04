@@ -9,16 +9,16 @@ import (
 	"time"
 )
 
-func NewConn(network, addr, proxyAddr string, timeout time.Duration) (conn net.Conn, err error) {
+func NewConn(addr, proxyAddr string, timeout time.Duration) (conn net.Conn, err error) {
 	if proxyAddr == "" {
-		conn, err = net.DialTimeout(network, addr, timeout)
+		conn, err = net.DialTimeout("tcp", addr, timeout)
 	} else {
 		var proxyDialer proxy.Dialer
 		proxyDialer, err = proxyDialerFromURL(proxyAddr, timeout)
 		if err != nil {
 			return
 		}
-		conn, err = proxyDialer.Dial(network, addr)
+		conn, err = proxyDialer.Dial("tcp", addr)
 	}
 	return
 }

@@ -26,12 +26,12 @@ type Consumer struct {
 func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 	saramaConfig := sarama.NewConfig()
 	saramaConfig.Consumer.Offsets.Initial = sarama.OffsetNewest
-	saramaConfig.Net.DialTimeout = 3 * time.Minute
-	saramaConfig.Net.ReadTimeout = 3 * time.Minute
-	saramaConfig.Net.WriteTimeout = 3 * time.Minute
+	saramaConfig.Net.DialTimeout = 60 * time.Second
+	saramaConfig.Net.ReadTimeout = 60 * time.Second
+	saramaConfig.Net.WriteTimeout = 60 * time.Second
 	saramaConfig.Consumer.Return.Errors = true
-	saramaConfig.Consumer.Group.Session.Timeout = 5 * time.Minute
-	saramaConfig.Consumer.Group.Rebalance.Timeout = 5 * time.Minute
+	saramaConfig.Consumer.Group.Session.Timeout = 3 * time.Minute
+	saramaConfig.Consumer.Group.Rebalance.Timeout = 3 * time.Minute
 	if config.Kerberos.KeytabPath != "" {
 		saramaConfig.Net.SASL.Mechanism = sarama.SASLTypeGSSAPI
 		saramaConfig.Net.SASL.GSSAPI.AuthType = sarama.KRB5_KEYTAB_AUTH
@@ -42,12 +42,12 @@ func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 		saramaConfig.Net.SASL.GSSAPI.Realm = config.Kerberos.Realm
 		saramaConfig.Net.SASL.GSSAPI.ServiceName = config.Kerberos.ServiceName
 		saramaConfig.Net.SASL.GSSAPI.Username = config.Kerberos.Username
-		saramaConfig.Net.SASL.GSSAPI.BuildSpn = func(serverName, host string) string {
-			ret := fmt.Sprintf("%s/%s", serverName, host)
+		saramaConfig.Net.SASL.GSSAPI.BuildSpn = func(serviceName, host string) string {
+			ret := fmt.Sprintf("%s/%s", serviceName, host)
 			domain, err := net.LookupAddr(host)
 			if err == nil {
 				if len(domain) > 0 {
-					ret = fmt.Sprintf("%s/%s", serverName, domain[0])
+					ret = fmt.Sprintf("%s/%s", serviceName, domain[0])
 				}
 			}
 			return ret
@@ -98,9 +98,9 @@ func (c *Consumer) StartConsume() {
 				c.logger.Errorf("conn to kafka err: %v, retry count: %v/%v", err, i, retryCount)
 				time.Sleep(retrySleep)
 			}
+			c.groups = append(c.groups, group)
+			go c.consume(group, binding)
 		}
-		c.groups = append(c.groups, group)
-		go c.consume(group, binding)
 	}
 }
 

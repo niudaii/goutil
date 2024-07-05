@@ -2,6 +2,7 @@ package kafka
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/IBM/sarama"
 	"github.com/dustin/go-humanize"
 	"github.com/zp857/goutil/constants/v1"
@@ -10,6 +11,7 @@ import (
 	"github.com/zp857/goutil/slice"
 	"github.com/zp857/goutil/structs"
 	"go.uber.org/zap"
+	"net"
 	"net/http"
 )
 
@@ -35,7 +37,14 @@ func NewProducer(config *ProducerConfig) (p *Producer, err error) {
 		saramaConfig.Net.SASL.GSSAPI.ServiceName = config.Kerberos.ServiceName
 		saramaConfig.Net.SASL.GSSAPI.Username = config.Kerberos.Username
 		saramaConfig.Net.SASL.GSSAPI.BuildSpn = func(serviceName, host string) string {
-			return saramaConfig.Net.SASL.GSSAPI.Username
+			ret := fmt.Sprintf("%s/%s", serviceName, host)
+			domain, err := net.LookupAddr(host)
+			if err == nil {
+				if len(domain) > 0 {
+					ret = fmt.Sprintf("%s/%s", serviceName, domain[0])
+				}
+			}
+			return ret
 		}
 	}
 	saramaConfig.Producer.RequiredAcks = sarama.WaitForAll

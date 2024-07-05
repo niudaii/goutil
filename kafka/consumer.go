@@ -26,12 +26,12 @@ type Consumer struct {
 func NewConsumer(config *ConsumerConfig) (consumer *Consumer) {
 	saramaConfig := sarama.NewConfig()
 	saramaConfig.Consumer.Offsets.Initial = sarama.OffsetNewest
-	saramaConfig.Net.DialTimeout = 5 * time.Minute
-	saramaConfig.Net.ReadTimeout = 5 * time.Minute
-	saramaConfig.Net.WriteTimeout = 5 * time.Minute
+	//saramaConfig.Net.DialTimeout = 60 * time.Second
+	//saramaConfig.Net.ReadTimeout = 60 * time.Second
+	//saramaConfig.Net.WriteTimeout = 60 * time.Minute
 	saramaConfig.Consumer.Return.Errors = true
-	saramaConfig.Consumer.Group.Session.Timeout = 10 * time.Minute
-	saramaConfig.Consumer.Group.Rebalance.Timeout = 10 * time.Minute
+	//saramaConfig.Consumer.Group.Session.Timeout = 1 * time.Minute
+	//saramaConfig.Consumer.Group.Rebalance.Timeout = 1 * time.Minute
 	if config.Kerberos.KeytabPath != "" {
 		saramaConfig.Net.SASL.Mechanism = sarama.SASLTypeGSSAPI
 		saramaConfig.Net.SASL.GSSAPI.AuthType = sarama.KRB5_KEYTAB_AUTH

@@ -89,10 +89,14 @@ const (
 	ParseConfigError = "error parse config %v err: %v\n"
 	InitLoggerError  = "error Init logger err: %v\n"
 
-	ConnDBError       = "conn to the db err: %v"
-	InitEngineError   = "init engine err: %v"
+	ConnDBError        = "conn to the db err: %v"
+	RegisterTableError = "register table err: %v"
+
+	InitEngineError = "init engine err: %v"
+
 	ParseRequestError = "parse request err: %v"
-	InvalidOperation  = "invalid operation err: %v"
+
+	InvalidOperation = "invalid operation err: %v"
 
 	InitUsecaseError = "init usecase err: %v"
 )

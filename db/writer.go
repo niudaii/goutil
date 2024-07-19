@@ -4,6 +4,7 @@ import (
 	v1 "github.com/zp857/goutil/constants/v1"
 	"go.uber.org/zap"
 	"gorm.io/gorm/logger"
+	"strings"
 )
 
 type Writer struct {
@@ -20,7 +21,9 @@ func NewWriter(w logger.Writer, logZap bool) *Writer {
 
 func (w *Writer) Printf(message string, data ...interface{}) {
 	if w.logZap {
-		zap.L().Sugar().Named(v1.GormLogger).Infof(message, data...)
+		if !strings.Contains(message, "Duplicate entry") {
+			zap.L().Sugar().Named(v1.GormLogger).Infof(message, data...)
+		}
 	} else {
 		w.Writer.Printf(message, data...)
 	}

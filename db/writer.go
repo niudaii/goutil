@@ -20,10 +20,11 @@ func NewWriter(w logger.Writer, logZap bool) *Writer {
 }
 
 func (w *Writer) Printf(message string, data ...interface{}) {
+	if !strings.Contains(message, "Error 1062") {
+		return
+	}
 	if w.logZap {
-		if !strings.Contains(message, "Error 1062") {
-			zap.L().Sugar().Named(v1.GormLogger).Infof(message, data...)
-		}
+		zap.L().Sugar().Named(v1.GormLogger).Infof(message, data...)
 	} else {
 		w.Writer.Printf(message, data...)
 	}

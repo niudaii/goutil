@@ -40,3 +40,12 @@ func (ht *Tracker) GetHistory() []string {
 	copy(historyCopy, ht.history)
 	return historyCopy
 }
+
+// ClearHistory 清除所有历史记录
+func (ht *Tracker) ClearHistory() {
+	ht.mu.Lock() // 加锁以确保线程安全
+	defer ht.mu.Unlock()
+
+	// 重置历史记录切片
+	ht.history = make([]string, 0, ht.limit)
+}

@@ -13,8 +13,9 @@ type Tracker struct {
 // NewHistoryTracker 创建一个新的 HistoryTracker
 func NewHistoryTracker(limit int) *Tracker {
 	return &Tracker{
-		history: make([]string, 0, limit),
-		limit:   limit,
+		history:    make([]string, 0, limit),
+		historySet: make(map[string]struct{}),
+		limit:      limit,
 	}
 }
 

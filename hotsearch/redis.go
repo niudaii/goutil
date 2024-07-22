@@ -3,6 +3,7 @@ package hotsearch
 import (
 	"context"
 	"github.com/go-redis/redis/v8"
+	"time"
 )
 
 type RedisClient struct {
@@ -21,8 +22,13 @@ func NewRedisClient(addr, password string, db int) *RedisClient {
 }
 
 func (r *RedisClient) RecordKeyword(keyword string) error {
+	key := "search_keywords"
 	// 增加关键词的计数
-	return r.client.ZIncrBy(r.ctx, "search_keywords", 1, keyword).Err()
+	if err := r.client.ZIncrBy(r.ctx, key, 1, keyword).Err(); err != nil {
+		return err
+	}
+	// 更新 key 的过期时间为一周
+	return r.client.Expire(r.ctx, key, 7*24*time.Hour).Err()
 }
 
 func (r *RedisClient) GetTopKeywords(limit int) ([]redis.Z, error) {

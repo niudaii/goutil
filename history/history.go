@@ -4,9 +4,10 @@ import "sync"
 
 // Tracker 用于跟踪最近的查询记录
 type Tracker struct {
-	history []string
-	limit   int
-	mu      sync.Mutex
+	history    []string
+	historySet map[string]struct{} // 使用 map 来快速检查重复项
+	limit      int
+	mu         sync.Mutex
 }
 
 // NewHistoryTracker 创建一个新的 HistoryTracker
@@ -22,12 +23,20 @@ func (ht *Tracker) AddRecord(record string) {
 	ht.mu.Lock() // 加锁保证线程安全
 	defer ht.mu.Unlock()
 
+	// 检查记录是否已经存在
+	if _, exists := ht.historySet[record]; exists {
+		return
+	}
+
 	// 如果达到限制，移除最后一个元素
 	if len(ht.history) >= ht.limit {
+		lastRecord := ht.history[len(ht.history)-1]
+		delete(ht.historySet, lastRecord) // 从 set 中也移除
 		ht.history = ht.history[:ht.limit-1]
 	}
 	// 将新记录插入到切片的开头
 	ht.history = append([]string{record}, ht.history...)
+	ht.historySet[record] = struct{}{} // 添加到 set 中标记已存在
 }
 
 // GetHistory 返回当前的查询记录
@@ -48,4 +57,5 @@ func (ht *Tracker) ClearHistory() {
 
 	// 重置历史记录切片
 	ht.history = make([]string, 0, ht.limit)
+	ht.historySet = make(map[string]struct{})
 }

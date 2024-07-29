@@ -21,6 +21,10 @@ func NewHistoryTracker(limit int) *Tracker {
 
 // AddRecord 添加一条新的记录
 func (ht *Tracker) AddRecord(record string) {
+	if record == "" {
+		return
+	}
+
 	ht.mu.Lock() // 加锁保证线程安全
 	defer ht.mu.Unlock()
 

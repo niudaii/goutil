@@ -41,6 +41,9 @@ func NewRedisClient(addr, password string, db int) *RedisClient {
 //}
 
 func (r *RedisClient) IncrementKeywordCount(keyword string) error {
+	if keyword == "" {
+		return nil
+	}
 	key := fmt.Sprintf("keyword:%s", keyword) // 为每个关键词创建独立的键
 	sortedSetKey := "keywords:rank"           // Sorted Set 的键
 

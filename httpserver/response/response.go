@@ -30,10 +30,10 @@ func OkWithMessage(msg string, c *gin.Context) {
 
 func ErrorWithMessage(msg string, err error, c *gin.Context) {
 	if err != nil {
-		zap.L().Named(v1.GinLogger).Error(
+		zap.L().Named(v1.GinLogger).Sugar().Errorf("%v => %v\n%v",
 			msg,
-			zap.Error(err),
-			zap.Any(v1.StackKey, string(errorx.GetStack(2, 10))),
+			err,
+			string(errorx.GetStack(2, 10)),
 		)
 	}
 	Result(http.StatusInternalServerError, struct{}{}, msg, c)

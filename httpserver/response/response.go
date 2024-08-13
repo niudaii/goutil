@@ -30,7 +30,7 @@ func OkWithMessage(msg string, c *gin.Context) {
 
 func ErrorWithMessage(msg string, err error, c *gin.Context) {
 	if err != nil {
-		zap.L().Named(v1.GinLogger).Sugar().Errorf(
+		zap.L().Named(v1.GinLogger).Error(
 			msg,
 			zap.Error(err),
 			zap.Any(v1.StackKey, string(errorx.GetStack(2, 10))),

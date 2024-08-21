@@ -30,6 +30,7 @@ const (
 	SaveResult  = "Result Saved: %v"
 
 	ScanConfiguration   = "Scan Configuration:\n%v"
+	NewRunnerError      = "NewRunner Error: %v"
 	InitializationError = "Initialization Failed: %v"
 
 	UnsupportedProtocol = "Unsupported Protocol: %v"

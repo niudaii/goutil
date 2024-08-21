@@ -12,24 +12,24 @@ const (
 	TaskFinished     = "Task Finished"
 	TaskProgress     = "Task Progress: %v/%v"
 
-	RunStarted  = "Run Started: %v"
-	RunCount    = "Run Count: %v"
-	RunResult   = "Run Result: %v => %v"
-	RunFinished = "Run Finished: Duration=%v"
-	RunFailed   = "Run Failed: %v"
-	RunTimeout  = "Run Timeout: MaxRuntime=%v"
+	RunStarted  = "Run Started => %v"
+	RunCount    = "Run Count => %v"
+	RunResult   = "Run Result %v => %v"
+	RunFinished = "Run Finished spent=%v"
+	RunFailed   = "Run Failed %v"
+	RunTimeout  = "Run Timeout maxRuntime=%v"
 
 	ProgramStarted = "Program Started"
 	ProgramExited  = "Program Exited"
-	ProgramError   = "Program Error: %v"
+	ProgramError   = "Program err: %v"
 
-	TargetCount = "Target Count: %v"
+	TargetCount = "Target Count => %v"
 
 	EmptyResult = "Result is Empty"
-	SaveResult  = "Result Saved: %v"
+	SaveResult  = "Result Saved => %v"
 
-	ScanConfiguration   = "Scan Configuration:\n%v"
-	NewRunnerError      = "NewRunner Error: %v"
+	ScanConfiguration   = "Scan Config =>\n%v"
+	NewRunnerError      = "NewRunner err: %v"
 	InitializationError = "Initialization Failed: %v"
 
 	UnsupportedProtocol = "Unsupported Protocol: %v"

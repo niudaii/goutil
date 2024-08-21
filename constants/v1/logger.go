@@ -105,4 +105,5 @@ const (
 	TaskLimitExceeded = "task limit exceeded. limit: %v, current: %v"
 	NoPluginsLoaded   = "no plugin loaded"
 	CheckAliveError   = "check alive err: %v"
+	FileNotExist      = "file %v does not exist"
 )

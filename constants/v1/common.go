@@ -23,8 +23,7 @@ const (
 	ProgramExited  = "Program Exited"
 	ProgramError   = "Program Error: %v"
 
-	FileNotExist = "Error: File does not exist: %v"
-	TargetCount  = "Target Count: %v"
+	TargetCount = "Target Count: %v"
 
 	EmptyResult = "Result is Empty"
 	SaveResult  = "Result Saved: %v"

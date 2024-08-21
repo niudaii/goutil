@@ -102,7 +102,7 @@ const (
 )
 
 const (
-	TaskLimitExceeded = "Task limit exceeded. Limit: %v, Current: %v"
+	TaskLimitExceeded = "task limit exceeded. limit: %v, current: %v"
 	NoPluginsLoaded   = "no plugin loaded"
 	CheckAliveError   = "check alive err: %v"
 )

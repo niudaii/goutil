@@ -20,9 +20,8 @@ const (
 
 func Init(config Config) (err error) {
 	for i := 1; i <= retryCount; i++ {
-		err = Conn(config)
-		if err == nil {
-			break
+		if err = connectDB(config); err == nil {
+			return
 		}
 		zap.L().Sugar().Errorf("conn to db err: %v, retry count: %v/%v", err, i, retryCount)
 		time.Sleep(retrySleep)
@@ -30,7 +29,7 @@ func Init(config Config) (err error) {
 	return
 }
 
-func Conn(config Config) (err error) {
+func connectDB(config Config) (err error) {
 	if config.DBName == "" {
 		err = fmt.Errorf(v1.EmptyDBNameError)
 		return

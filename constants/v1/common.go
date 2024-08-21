@@ -16,19 +16,19 @@ const (
 	RunCount    = "Run Count => %v"
 	RunResult   = "Run Result %v => %v"
 	RunFinished = "Run Finished spent=%v"
-	RunFailed   = "Run Failed %v"
+	RunFailed   = "Run Failed: %v"
 	RunTimeout  = "Run Timeout maxRuntime=%v"
 
 	ProgramStarted = "Program Started"
 	ProgramExited  = "Program Exited"
-	ProgramError   = "Program err: %v"
+	ProgramError   = "Program Error: %v"
 
 	TargetCount = "Target Count => %v"
 
 	EmptyResult = "Result is Empty"
 	SaveResult  = "Result Saved => %v"
 
-	ScanConfiguration   = "Scan Config =>\n%v"
+	ScanConfiguration   = "Scan Configuration =>\n%v"
 	NewRunnerError      = "NewRunner err: %v"
 	InitializationError = "Initialization Failed: %v"
 

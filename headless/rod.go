@@ -45,11 +45,11 @@ func NewRod(options *RodOptions) (l *launcher.Launcher, browser *rod.Browser) {
 		Delete("no-startup-window").
 		Set("password-store", "basic").
 		Set("safebrowsing-disable-auto-update").
-		Set("no-default-browser-check").
 		Set("disable-gpu").
 		Set("no-default-browser-check").
-		Set("enable-automation", "false").                    // 防止监测 webdriver
-		Set("disable-blink-features", "AutomationControlled") // 禁用 blink 特征，绕过了加速乐检测
+		Set("enable-automation", "false"). // 防止监测 webdriver
+		Set("disable-blink-features", "AutomationControlled"). // 禁用 blink 特征，绕过了加速乐检测
+		NoSandbox(true)
 	if options.Proxy != "" {
 		l.Set(flags.ProxyServer, options.Proxy)
 	}

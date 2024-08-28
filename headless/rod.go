@@ -47,7 +47,7 @@ func NewRod(options *RodOptions) (l *launcher.Launcher, browser *rod.Browser) {
 		Set("safebrowsing-disable-auto-update").
 		Set("disable-gpu").
 		Set("no-default-browser-check").
-		Set("enable-automation", "false"). // 防止监测 webdriver
+		Set("enable-automation", "false").                     // 防止监测 webdriver
 		Set("disable-blink-features", "AutomationControlled"). // 禁用 blink 特征，绕过了加速乐检测
 		NoSandbox(true)
 	if options.Proxy != "" {

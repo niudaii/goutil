@@ -8,7 +8,6 @@ import (
 	"github.com/shirou/gopsutil/v3/net"
 	"github.com/shirou/gopsutil/v3/process"
 	"github.com/zp857/goutil/constants"
-	"log"
 	"os"
 	"runtime"
 	"time"
@@ -41,7 +40,6 @@ func loadDiskIO() []disk.IOCountersStat {
 	var diskIOList []disk.IOCountersStat
 	stats, err := disk.IOCounters()
 	if err != nil {
-		log.Println(err)
 		return diskIOList
 	}
 	for _, io := range stats {
@@ -114,6 +112,7 @@ func GetNetIO() (uint64, uint64) {
 			}
 		}
 	}
+	netIOStats = netIOStats2
 	return bytesSent, bytesRecv
 }
 

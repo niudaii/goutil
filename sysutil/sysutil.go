@@ -99,7 +99,7 @@ func GetNetIO() (uint64, uint64) {
 	for _, net2 := range netIOStats2 {
 		for _, net1 := range netIOStats {
 			if net2.Name == net1.Name {
-				if net2.BytesSent != 0 && net1.BytesSent != 0 && net2.BytesSent > net2.BytesSent {
+				if net2.BytesSent != 0 && net1.BytesSent != 0 && net2.BytesSent > net1.BytesSent {
 					bytesSent += uint64(float64(net2.BytesSent-net1.BytesSent) / 2)
 				}
 				if net2.BytesRecv != 0 && net1.BytesRecv != 0 && net2.BytesRecv > net1.BytesRecv {

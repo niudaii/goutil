@@ -8,7 +8,6 @@ import (
 	"github.com/shirou/gopsutil/v3/net"
 	"github.com/shirou/gopsutil/v3/process"
 	"github.com/zp857/goutil/constants"
-	"log"
 	"os"
 	"runtime"
 	"time"
@@ -35,30 +34,32 @@ func GetDiskPercent() float64 {
 	return percentage
 }
 
-var ioStat = make(map[string]disk.IOCountersStat)
+var diskIOStats = make([]disk.IOCountersStat, 0)
+
+func loadDiskIO() []disk.IOCountersStat {
+	stats, _ := disk.IOCounters()
+	var diskIOList []disk.IOCountersStat
+	for _, io := range stats {
+		diskIOList = append(diskIOStats, io)
+	}
+	return diskIOList
+}
 
 func GetDiskIO() (uint64, uint64) {
 	if runtime.GOOS == constants.Windows {
 		return 0, 0
 	}
 	// 获取磁盘 I/O 信息
-	var err error
-	if len(ioStat) == 0 {
-		ioStat, err = disk.IOCounters()
-		if err != nil {
-			return 0, 0
-		}
+	if len(diskIOStats) == 0 {
+		diskIOStats = loadDiskIO()
 	}
 	time.Sleep(2 * time.Second)
-	ioStats2, err := disk.IOCounters()
-	if err != nil {
-		return 0, 0
-	}
+	diskIOStats2 := loadDiskIO()
+	// 计算 I/O 占用率
 	var readBytes uint64
 	var writeBytes uint64
-	// 计算 I/O 占用率
-	for _, io1 := range ioStat {
-		for _, io2 := range ioStats2 {
+	for _, io2 := range diskIOStats2 {
+		for _, io1 := range diskIOStats {
 			if io2.Name == io1.Name {
 				if io2.ReadBytes != 0 && io1.ReadBytes != 0 && io2.ReadBytes > io1.ReadBytes {
 					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 2)
@@ -70,33 +71,45 @@ func GetDiskIO() (uint64, uint64) {
 			}
 		}
 	}
-	ioStat = ioStats2
+	diskIOStats = diskIOStats2
 	return readBytes, writeBytes
 }
 
-func GetNetIO() float64 {
-	// 获取网络 I/O 信息
-	netStats1, err := net.IOCounters(false)
-	if err != nil {
-		log.Fatal(err)
-	}
-	time.Sleep(1 * time.Second)
-	netStats2, err := net.IOCounters(false)
-	if err != nil {
-		log.Fatal(err)
-	}
+var netIOStats = make([]net.IOCountersStat, 0)
 
+func loadNetIO() []net.IOCountersStat {
+	netStat, _ := net.IOCounters(true)
+	netStatAll, _ := net.IOCounters(false)
+	var netIOList []net.IOCountersStat
+	netIOList = append(netIOList, netStat...)
+	netIOList = append(netIOList, netStatAll...)
+	return netIOList
+}
+
+func GetNetIO() (uint64, uint64) {
+	// 获取网络 I/O 信息
+	if len(netIOStats) == 0 {
+		netIOStats = loadNetIO()
+	}
+	time.Sleep(2 * time.Second)
+	netIOStats2 := loadNetIO()
 	// 计算带宽占用
-	for _, stat1 := range netStats1 {
-		for _, stat2 := range netStats2 {
-			if stat1.Name == stat2.Name {
-				bytesSent := stat2.BytesSent - stat1.BytesSent
-				bytesRecv := stat2.BytesRecv - stat1.BytesRecv
-				fmt.Printf("Interface: %s, Bytes Sent: %d, Bytes Received: %d\n", stat1.Name, bytesSent, bytesRecv)
+	var bytesSent uint64
+	var bytesRecv uint64
+	for _, net2 := range netIOStats2 {
+		for _, net1 := range netIOStats {
+			if net2.Name == net1.Name {
+				if net2.BytesSent != 0 && net1.BytesSent != 0 && net2.BytesSent > net2.BytesSent {
+					bytesSent += uint64(float64(net2.BytesSent-net1.BytesSent) / 2)
+				}
+				if net2.BytesRecv != 0 && net1.BytesRecv != 0 && net2.BytesRecv > net1.BytesRecv {
+					bytesRecv += uint64(float64(net2.BytesRecv-net1.BytesRecv) / 2)
+				}
+				break
 			}
 		}
 	}
-	return 0
+	return bytesSent, bytesRecv
 }
 
 func GetCurrentProcess() (float64, float32) {

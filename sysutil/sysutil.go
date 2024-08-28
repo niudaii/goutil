@@ -56,10 +56,10 @@ func GetDiskIO() (uint64, uint64) {
 		for _, io2 := range ioStats2 {
 			if io2.Name == io1.Name {
 				if io2.ReadBytes != 0 && io1.ReadBytes != 0 && io2.ReadBytes > io1.ReadBytes {
-					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 60)
+					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 3 / 60)
 				}
 				if io2.WriteBytes != 0 && io1.WriteBytes != 0 && io2.WriteBytes > io1.WriteBytes {
-					writeBytes += uint64(float64(io2.WriteBytes-io1.WriteBytes) / 60)
+					writeBytes += uint64(float64(io2.WriteBytes-io1.WriteBytes) / 3 / 60)
 				}
 				break
 			}

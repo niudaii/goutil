@@ -35,16 +35,21 @@ func GetDiskPercent() float64 {
 	return percentage
 }
 
+var ioStat = make(map[string]disk.IOCountersStat)
+
 func GetDiskIO() (uint64, uint64) {
 	if runtime.GOOS == constants.Windows {
 		return 0, 0
 	}
 	// 获取磁盘 I/O 信息
-	ioStat, err := disk.IOCounters()
-	if err != nil {
-		return 0, 0
+	var err error
+	if len(ioStat) == 0 {
+		ioStat, err = disk.IOCounters()
+		if err != nil {
+			return 0, 0
+		}
 	}
-	time.Sleep(3 * time.Second)
+	time.Sleep(2 * time.Second)
 	ioStats2, err := disk.IOCounters()
 	if err != nil {
 		return 0, 0
@@ -56,15 +61,16 @@ func GetDiskIO() (uint64, uint64) {
 		for _, io2 := range ioStats2 {
 			if io2.Name == io1.Name {
 				if io2.ReadBytes != 0 && io1.ReadBytes != 0 && io2.ReadBytes > io1.ReadBytes {
-					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 3)
+					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 2)
 				}
 				if io2.WriteBytes != 0 && io1.WriteBytes != 0 && io2.WriteBytes > io1.WriteBytes {
-					writeBytes += uint64(float64(io2.WriteBytes-io1.WriteBytes) / 3)
+					writeBytes += uint64(float64(io2.WriteBytes-io1.WriteBytes) / 2)
 				}
 				break
 			}
 		}
 	}
+	ioStat = ioStats2
 	return readBytes, writeBytes
 }
 

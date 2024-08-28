@@ -8,6 +8,7 @@ import (
 	"github.com/shirou/gopsutil/v3/net"
 	"github.com/shirou/gopsutil/v3/process"
 	"github.com/zp857/goutil/constants"
+	"log"
 	"os"
 	"runtime"
 	"time"
@@ -37,10 +38,14 @@ func GetDiskPercent() float64 {
 var diskIOStats = make([]disk.IOCountersStat, 0)
 
 func loadDiskIO() []disk.IOCountersStat {
-	stats, _ := disk.IOCounters()
 	var diskIOList []disk.IOCountersStat
+	stats, err := disk.IOCounters()
+	if err != nil {
+		log.Println(err)
+		return diskIOList
+	}
 	for _, io := range stats {
-		diskIOList = append(diskIOStats, io)
+		diskIOList = append(diskIOList, io)
 	}
 	return diskIOList
 }
@@ -62,10 +67,10 @@ func GetDiskIO() (uint64, uint64) {
 		for _, io1 := range diskIOStats {
 			if io2.Name == io1.Name {
 				if io2.ReadBytes != 0 && io1.ReadBytes != 0 && io2.ReadBytes > io1.ReadBytes {
-					readBytes += uint64(float64(io2.ReadBytes-io1.ReadBytes) / 2)
+					readBytes += io2.ReadBytes - io1.ReadBytes/2
 				}
 				if io2.WriteBytes != 0 && io1.WriteBytes != 0 && io2.WriteBytes > io1.WriteBytes {
-					writeBytes += uint64(float64(io2.WriteBytes-io1.WriteBytes) / 2)
+					writeBytes += io2.WriteBytes - io1.WriteBytes/2
 				}
 				break
 			}

@@ -34,8 +34,6 @@ func GetDiskPercent() float64 {
 	return percentage
 }
 
-var diskIOStats = make([]disk.IOCountersStat, 0)
-
 func loadDiskIO() []disk.IOCountersStat {
 	var diskIOList []disk.IOCountersStat
 	stats, err := disk.IOCounters()
@@ -47,6 +45,8 @@ func loadDiskIO() []disk.IOCountersStat {
 	}
 	return diskIOList
 }
+
+var diskIOStats = make([]disk.IOCountersStat, 0)
 
 func GetDiskIO() (uint64, uint64) {
 	if runtime.GOOS == constants.Windows {
@@ -78,8 +78,6 @@ func GetDiskIO() (uint64, uint64) {
 	return readBytes, writeBytes
 }
 
-var netIOStats = make([]net.IOCountersStat, 0)
-
 func loadNetIO() []net.IOCountersStat {
 	netStat, _ := net.IOCounters(true)
 	netStatAll, _ := net.IOCounters(false)
@@ -89,12 +87,14 @@ func loadNetIO() []net.IOCountersStat {
 	return netIOList
 }
 
+var netIOStats = make([]net.IOCountersStat, 0)
+
 func GetNetIO() (uint64, uint64) {
 	// 获取网络 I/O 信息
 	if len(netIOStats) == 0 {
 		netIOStats = loadNetIO()
+		time.Sleep(2 * time.Second)
 	}
-	time.Sleep(2 * time.Second)
 	netIOStats2 := loadNetIO()
 	// 计算带宽占用
 	var bytesSent uint64

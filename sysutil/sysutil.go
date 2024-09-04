@@ -55,8 +55,8 @@ func GetDiskIO() (uint64, uint64) {
 	// 获取磁盘 I/O 信息
 	if len(diskIOStats) == 0 {
 		diskIOStats = loadDiskIO()
+		time.Sleep(2 * time.Second)
 	}
-	time.Sleep(2 * time.Second)
 	diskIOStats2 := loadDiskIO()
 	// 计算 I/O 占用率
 	var readBytes uint64

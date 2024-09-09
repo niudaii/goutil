@@ -22,6 +22,14 @@ const (
 )
 
 const (
+	JAVA   = "java"
+	PHP    = "php"
+	ASP    = "asp"
+	PYTHON = "python"
+	NODEJS = "nodejs"
+)
+
+const (
 	LogExt = ".log"
 )
 

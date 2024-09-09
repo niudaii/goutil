@@ -29,11 +29,11 @@ func ShiroAesCbcEncrypt(key []byte, Content []byte) string {
 	return base64.StdEncoding.EncodeToString(append(iv[:], cipherText[:]...))
 }
 
-func ShiroAesGcmEncrypt(data, key []byte) (encrypted string, err error) {
+func ShiroAesGcmEncrypt(key []byte, Content []byte) string {
 	block, _ := aes.NewCipher(key)
 	nonce := make([]byte, 16)
 	io.ReadFull(rand.Reader, nonce)
 	aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
-	ciphertext := aesgcm.Seal(nil, nonce, data, nil)
-	return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...)), nil
+	ciphertext := aesgcm.Seal(nil, nonce, Content, nil)
+	return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))
 }

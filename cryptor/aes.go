@@ -5,9 +5,19 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"encoding/base64"
 	"github.com/forgoer/openssl"
 	"io"
 )
+
+func AesGcmEncrypt(data, key []byte) (encrypted string, err error) {
+	block, _ := aes.NewCipher(key)
+	nonce := make([]byte, 16)
+	io.ReadFull(rand.Reader, nonce)
+	aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
+	ciphertext := aesgcm.Seal(nil, nonce, data, nil)
+	return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...)), nil
+}
 
 func AesEcbEncrypt(data, key []byte) (encrypted []byte, err error) {
 	encrypted, err = openssl.AesECBEncrypt(data, key, openssl.PKCS7_PADDING)

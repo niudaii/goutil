@@ -21,6 +21,7 @@ func NewChromedp(options *ChromedpOptions) (ctx context.Context, cancel context.
 		chromedp.Flag("ignore-certificate-errors", true),
 		chromedp.DisableGPU,
 		chromedp.NoDefaultBrowserCheck,
+		chromedp.Flag("disable-images", true),
 		chromedp.Flag("disable-blink-features", "AutomationControlled"), // 禁用 blink 特征，绕过了加速乐检测
 	)
 	if options.Proxy != "" {

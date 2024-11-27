@@ -33,7 +33,7 @@ var MyDevice = devices.Device{
 }
 
 func NewRod(options *RodOptions) (l *launcher.Launcher, browser *rod.Browser) {
-	l = launcher.New().
+	l = launcher.New().Leakless(false).
 		Headless(options.Headless).
 		Set("ignore-certificate-errors").
 		Delete("disable-component-extensions-with-background-pages").

@@ -80,6 +80,9 @@ func ReadFileByLine(path string) ([]string, error) {
 		if err != nil {
 			continue
 		}
+		if l == "" {
+			continue
+		}
 		result = append(result, l)
 	}
 

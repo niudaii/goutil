@@ -1,10 +1,11 @@
 package logger
 
 import (
-	"github.com/zp857/goutil/fileutil"
+	"os"
+
+	"github.com/niudaii/goutil/fileutil"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"os"
 )
 
 func Init() (err error) {

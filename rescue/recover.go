@@ -1,8 +1,8 @@
 package rescue
 
 import (
-	v1 "github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/errorx"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/errorx"
 	"go.uber.org/zap"
 )
 

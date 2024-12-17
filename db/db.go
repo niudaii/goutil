@@ -2,13 +2,14 @@ package db
 
 import (
 	"fmt"
-	"github.com/zp857/goutil/constants"
-	v1 "github.com/zp857/goutil/constants/v1"
+	"time"
+
+	"github.com/niudaii/goutil/constants"
+	v1 "github.com/niudaii/goutil/constants/v1"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"time"
 )
 
 var db *gorm.DB

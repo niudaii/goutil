@@ -1,10 +1,11 @@
 package db
 
 import (
-	v1 "github.com/zp857/goutil/constants/v1"
+	"strings"
+
+	v1 "github.com/niudaii/goutil/constants/v1"
 	"go.uber.org/zap"
 	"gorm.io/gorm/logger"
-	"strings"
 )
 
 type Writer struct {

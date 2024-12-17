@@ -3,8 +3,9 @@ package jsonutil
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/zp857/goutil/constants"
 	"strings"
+
+	"github.com/niudaii/goutil/constants"
 )
 
 func MustPretty(v any) (out string) {

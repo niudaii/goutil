@@ -1,11 +1,12 @@
 package signal
 
 import (
-	v1 "github.com/zp857/goutil/constants/v1"
-	"go.uber.org/zap"
 	"os"
 	"os/signal"
 	"syscall"
+
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"go.uber.org/zap"
 )
 
 func WaitingSignal() {

@@ -2,8 +2,9 @@ package progress
 
 import (
 	"fmt"
-	"github.com/zp857/goutil/mathutil"
 	"time"
+
+	"github.com/niudaii/goutil/mathutil"
 )
 
 func Calculate(total, finished int, start time.Time) (doneString string, doneFloat, remainingFloat float64) {

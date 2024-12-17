@@ -1,9 +1,10 @@
 package httputil
 
 import (
-	"github.com/imroc/req/v3"
-	"github.com/zp857/goutil/constants"
 	"strings"
+
+	"github.com/imroc/req/v3"
+	"github.com/niudaii/goutil/constants"
 )
 
 var (

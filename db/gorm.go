@@ -1,14 +1,15 @@
 package db
 
 import (
-	v1 "github.com/zp857/goutil/constants/v1"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
-	"gorm.io/gorm/schema"
 	"log"
 	"os"
 	"strings"
 	"time"
+
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+	"gorm.io/gorm/schema"
 )
 
 func (c *Config) GormConfig(prefix string, singular bool) *gorm.Config {

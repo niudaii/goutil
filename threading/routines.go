@@ -1,10 +1,11 @@
 package threading
 
 import (
-	"github.com/zp857/goutil/rescue"
-	"go.uber.org/zap"
 	"runtime"
 	"time"
+
+	"github.com/niudaii/goutil/rescue"
+	"go.uber.org/zap"
 )
 
 func GoSafe(fn func()) {

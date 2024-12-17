@@ -1,11 +1,12 @@
 package httputil
 
 import (
-	"github.com/imroc/req/v3"
-	"github.com/zp857/goutil/validator"
 	"net"
 	"regexp"
 	"strings"
+
+	"github.com/imroc/req/v3"
+	"github.com/niudaii/goutil/validator"
 )
 
 var (

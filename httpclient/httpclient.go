@@ -2,11 +2,11 @@ package httpclient
 
 import (
 	"github.com/imroc/req/v3"
-	v1 "github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/httpreq"
-	"github.com/zp857/goutil/jsonutil"
-	"github.com/zp857/goutil/slice"
-	"github.com/zp857/goutil/strutil"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/httpreq"
+	"github.com/niudaii/goutil/jsonutil"
+	"github.com/niudaii/goutil/slice"
+	"github.com/niudaii/goutil/strutil"
 	"go.uber.org/zap"
 )
 

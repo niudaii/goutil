@@ -1,14 +1,15 @@
 package logger
 
 import (
-	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"github.com/zp857/goutil/constants"
-	"github.com/zp857/goutil/constants/v1"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"os"
 	"path"
 	"time"
+
+	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
+	"github.com/niudaii/goutil/constants"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 func getEncoder(format string) zapcore.Encoder {

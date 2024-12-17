@@ -3,13 +3,14 @@ package kafkax
 import (
 	"context"
 	"fmt"
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/google/uuid"
-	v1 "github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/threading"
-	"go.uber.org/zap"
 	"strings"
 	"time"
+
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
+	"github.com/google/uuid"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/threading"
+	"go.uber.org/zap"
 )
 
 type Consumer struct {

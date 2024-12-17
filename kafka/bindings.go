@@ -2,7 +2,8 @@ package kafka
 
 import (
 	"encoding/json"
-	"github.com/zp857/goutil/reflectx"
+
+	"github.com/niudaii/goutil/reflectx"
 )
 
 type HandlerBinding struct {

@@ -2,9 +2,10 @@ package kafka
 
 import (
 	"context"
+
 	"github.com/IBM/sarama"
-	v1 "github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/threading"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/threading"
 )
 
 type ConsumerGroupHandler struct {

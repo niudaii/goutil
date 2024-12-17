@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"github.com/zp857/goutil/constants"
-	"github.com/zp857/goutil/constants/v1"
+	"github.com/niudaii/goutil/constants"
+	v1 "github.com/niudaii/goutil/constants/v1"
 )
 
 type Config struct {

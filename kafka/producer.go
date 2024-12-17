@@ -3,16 +3,17 @@ package kafka
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/IBM/sarama"
-	"github.com/dustin/go-humanize"
-	"github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/errorx"
-	"github.com/zp857/goutil/jsonutil"
-	"github.com/zp857/goutil/slice"
-	"github.com/zp857/goutil/structs"
-	"go.uber.org/zap"
 	"net"
 	"net/http"
+
+	"github.com/IBM/sarama"
+	"github.com/dustin/go-humanize"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/errorx"
+	"github.com/niudaii/goutil/jsonutil"
+	"github.com/niudaii/goutil/slice"
+	"github.com/niudaii/goutil/structs"
+	"go.uber.org/zap"
 )
 
 type Producer struct {

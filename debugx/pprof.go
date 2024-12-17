@@ -1,10 +1,11 @@
 package debugx
 
 import (
-	"github.com/zp857/goutil/threading"
-	"go.uber.org/zap"
 	"net/http"
 	_ "net/http/pprof"
+
+	"github.com/niudaii/goutil/threading"
+	"go.uber.org/zap"
 )
 
 type Config struct {

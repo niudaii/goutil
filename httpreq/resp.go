@@ -2,7 +2,7 @@ package httpreq
 
 import (
 	"github.com/imroc/req/v3"
-	"github.com/zp857/goutil/constants"
+	"github.com/niudaii/goutil/constants"
 )
 
 func GetHeaderString(resp *req.Response) (headerString string) {

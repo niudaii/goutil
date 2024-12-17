@@ -1,13 +1,14 @@
 package response
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/errorx"
-	"github.com/zp857/goutil/jsonutil"
-	"github.com/zp857/goutil/structs"
-	"go.uber.org/zap"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/errorx"
+	"github.com/niudaii/goutil/jsonutil"
+	"github.com/niudaii/goutil/structs"
+	"go.uber.org/zap"
 )
 
 func Result(code int, data interface{}, msg string, c *gin.Context) {

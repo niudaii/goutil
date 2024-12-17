@@ -1,8 +1,8 @@
 package configx
 
 import (
+	"github.com/niudaii/goutil/constants"
 	"github.com/spf13/viper"
-	"github.com/zp857/goutil/constants"
 )
 
 func ParseYaml(filename string, val interface{}) (err error) {

@@ -2,10 +2,11 @@ package httpreq
 
 import (
 	"crypto/tls"
-	"github.com/imroc/req/v3"
-	"github.com/zp857/goutil/constants"
 	"strings"
 	"time"
+
+	"github.com/imroc/req/v3"
+	"github.com/niudaii/goutil/constants"
 )
 
 type Options struct {

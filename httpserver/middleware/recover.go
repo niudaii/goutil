@@ -1,15 +1,16 @@
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/zp857/goutil/constants/v1"
-	"github.com/zp857/goutil/errorx"
-	"go.uber.org/zap"
 	"net"
 	"net/http"
 	"net/http/httputil"
 	"os"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"github.com/niudaii/goutil/errorx"
+	"go.uber.org/zap"
 )
 
 func GinRecovery(logger *zap.SugaredLogger, debug bool, skip, depth int) gin.HandlerFunc {

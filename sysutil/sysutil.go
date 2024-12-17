@@ -2,15 +2,16 @@ package sysutil
 
 import (
 	"fmt"
+	"os"
+	"runtime"
+	"time"
+
+	"github.com/niudaii/goutil/constants"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/mem"
 	"github.com/shirou/gopsutil/v3/net"
 	"github.com/shirou/gopsutil/v3/process"
-	"github.com/zp857/goutil/constants"
-	"os"
-	"runtime"
-	"time"
 )
 
 func GetCpuPercent() float64 {

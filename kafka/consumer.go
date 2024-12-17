@@ -3,12 +3,13 @@ package kafka
 import (
 	"context"
 	"fmt"
-	"github.com/IBM/sarama"
-	"github.com/google/uuid"
-	v1 "github.com/zp857/goutil/constants/v1"
-	"go.uber.org/zap"
 	"net"
 	"time"
+
+	"github.com/IBM/sarama"
+	"github.com/google/uuid"
+	v1 "github.com/niudaii/goutil/constants/v1"
+	"go.uber.org/zap"
 )
 
 type Consumer struct {

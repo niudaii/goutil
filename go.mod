@@ -1,4 +1,4 @@
-module github.com/zp857/goutil
+module github.com/niudaii/goutil
 
 go 1.21.5
 
@@ -9,13 +9,15 @@ require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/forgoer/openssl v1.6.0
+	github.com/gabriel-vasile/mimetype v1.4.5
 	github.com/gin-gonic/gin v1.9.1
+	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-rod/rod v0.114.8
-	github.com/go-rod/stealth v0.4.9
 	github.com/google/uuid v1.4.0
 	github.com/imroc/req/v3 v3.42.3
 	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible
 	github.com/pkg/sftp v1.13.6
+	github.com/satori/go.uuid v1.2.0
 	github.com/shirou/gopsutil/v3 v3.23.12
 	github.com/spf13/viper v1.18.2
 	github.com/stretchr/testify v1.9.0
@@ -43,13 +45,11 @@ require (
 	github.com/eapache/go-xerial-snappy v0.0.0-20230731223053-c322873962e3 // indirect
 	github.com/eapache/queue v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.5 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.14.0 // indirect
-	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
@@ -73,7 +73,6 @@ require (
 	github.com/jcmturner/rpc/v2 v2.0.3 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/jonboulle/clockwork v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
@@ -100,7 +99,6 @@ require (
 	github.com/refraction-networking/utls v1.6.0 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect

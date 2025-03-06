@@ -47,8 +47,8 @@ func GetHeaderMap(resp *req.Response) (headerMap map[string][]string) {
 
 func GetCert(resp *req.Response) (cert string) {
 	if resp.TLS != nil {
-		//cert = resp.TLS.PeerCertificates[0].Issuer.String()
-		cert = resp.TLS.PeerCertificates[0].Subject.String()
+		cert = resp.TLS.PeerCertificates[0].Subject.CommonName
+		// fmt.Println(jsonutil.MustPretty(resp.TLS.PeerCertificates[0]))
 	}
 	return cert
 }

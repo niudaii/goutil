@@ -67,7 +67,3 @@ func ParseCSVToStructs(filePath string, out interface{}, mappings []ColumnMappin
 
 	return nil
 }
-
-func WriteCSV(filename string, columns []string, data [][]string) (err error) {
-
-}

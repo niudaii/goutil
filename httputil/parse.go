@@ -3,9 +3,10 @@ package httputil
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/beevik/etree"
 	"net/url"
 	"strings"
+
+	"github.com/beevik/etree"
 )
 
 // ParseQueryParams 解析 GET 请求的 URL 查询参数
@@ -138,4 +139,15 @@ func ParseHeaderMap(headerMap map[string]string) []string {
 		headers = append(headers, k+": "+v)
 	}
 	return headers
+}
+
+func ClearPath(rawURL string) string {
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		fmt.Println("Error parsing URL:", err)
+		return ""
+	}
+	// 去掉查询参数
+	parsedURL.RawQuery = ""
+	return parsedURL.String()
 }

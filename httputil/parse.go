@@ -151,3 +151,12 @@ func ClearPath(rawURL string) string {
 	parsedURL.RawQuery = ""
 	return parsedURL.String()
 }
+
+func GetPath(rawURL string) string {
+	parsedURL, err := url.Parse(rawURL)
+	if err != nil {
+		fmt.Println("Error parsing URL:", err)
+		return ""
+	}
+	return parsedURL.Path
+}

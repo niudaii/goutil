@@ -1,17 +1,19 @@
 package headless
 
 import (
+	"time"
+
 	"github.com/go-rod/rod"
 	"github.com/go-rod/rod/lib/devices"
 	"github.com/go-rod/rod/lib/launcher"
 	"github.com/go-rod/rod/lib/launcher/flags"
-	"time"
 )
 
 type RodOptions struct {
 	Headless bool   `json:"headless"`
 	Proxy    string `json:"proxy"`
 	Debug    bool   `json:"debug"`
+	Path     string ``
 }
 
 var MyDevice = devices.Device{
@@ -51,6 +53,9 @@ func NewRod(options *RodOptions) (l *launcher.Launcher, browser *rod.Browser) {
 		Set("enable-automation", "false").                     // 防止监测 webdriver
 		Set("disable-blink-features", "AutomationControlled"). // 禁用 blink 特征，绕过了加速乐检测
 		NoSandbox(true)
+	if options.Path != "" {
+		l.Bin(options.Path)
+	}
 	if options.Proxy != "" {
 		l.Set(flags.ProxyServer, options.Proxy)
 	}

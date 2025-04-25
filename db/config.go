@@ -1,5 +1,9 @@
 package db
 
+import (
+	"github.com/niudaii/goutil/constants"
+)
+
 type Config struct {
 	DBType    string `yaml:"dbType" json:"dbType"`
 	GeneralDB `yaml:",inline" mapstructure:",squash"`
@@ -23,10 +27,12 @@ type GeneralDB struct {
 
 func (c *Config) DSN() string {
 	switch c.DBType {
-	case "mysql":
+	case constants.Mysql:
 		return c.Username + ":" + c.Password + "@tcp(" + c.Path + ":" + c.Port + ")/" + c.DBName + "?" + c.Config
-	case "pgsql":
+	case constants.Pgsql:
 		return "host=" + c.Path + " user=" + c.Username + " password=" + c.Password + " dbname=" + c.DBName + " port=" + c.Port + " " + c.Config
+	case constants.Sqlite:
+		return c.Path + "?" + c.Config
 	default:
 		return ""
 	}

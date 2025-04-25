@@ -39,8 +39,9 @@ const (
 )
 
 const (
-	Mysql = "mysql"
-	Pgsql = "pgsql"
+	Mysql  = "mysql"
+	Pgsql  = "pgsql"
+	Sqlite = "sqlite3"
 )
 
 const (

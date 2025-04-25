@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/glebarez/sqlite"
 	"github.com/niudaii/goutil/constants"
 	v1 "github.com/niudaii/goutil/constants/v1"
 	"go.uber.org/zap"
@@ -40,6 +41,8 @@ func connectDB(config Config) (err error) {
 		db, err = GormMysql(config)
 	case constants.Pgsql:
 		db, err = GormPgsql(config)
+	case constants.Sqlite:
+		db, err = GormSqlite(config)
 	default:
 		err = fmt.Errorf(v1.UnSupportDBTypeError)
 	}
@@ -67,6 +70,11 @@ func GormPgsql(config Config) (db *gorm.DB, err error) {
 		PreferSimpleProtocol: false,
 	}
 	db, err = gorm.Open(postgres.New(pgsqlConfig), config.GormConfig(config.Prefix, config.Singular))
+	return
+}
+
+func GormSqlite(config Config) (db *gorm.DB, err error) {
+	db, err = gorm.Open(sqlite.Open(config.DSN()), config.GormConfig(config.Prefix, config.Singular))
 	return
 }
 

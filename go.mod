@@ -6,7 +6,6 @@ require (
 	github.com/IBM/sarama v1.43.2
 	github.com/beevik/etree v1.4.0
 	github.com/chromedp/chromedp v0.9.2
-	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
 	github.com/dustin/go-humanize v1.0.1
 	github.com/forgoer/openssl v1.6.0
 	github.com/gabriel-vasile/mimetype v1.4.5

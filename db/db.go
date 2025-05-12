@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/glebarez/sqlite"
 	"github.com/niudaii/goutil/constants"
 	v1 "github.com/niudaii/goutil/constants/v1"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"modernc.org/sqlite"
 )
 
 var db *gorm.DB

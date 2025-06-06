@@ -1,8 +1,9 @@
 package slice
 
 import (
-	"golang.org/x/exp/constraints"
 	"reflect"
+
+	"golang.org/x/exp/constraints"
 )
 
 func Contain[T comparable](slice []T, target T) bool {
@@ -134,4 +135,14 @@ func IsEmpty(results any) bool {
 		return true
 	}
 	return v.Len() == 0
+}
+
+func FilterMinLen(minLen int, ss []string) []string {
+	var result []string
+	for _, s := range ss {
+		if len(s) >= minLen {
+			result = append(result, s)
+		}
+	}
+	return result
 }

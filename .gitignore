@@ -2,3 +2,4 @@
 *.png
 *.keytab
 *.csv
+.idea/

@@ -14,3 +14,13 @@ func RandomSleep(max int) {
 	n := rand.Intn(max)
 	time.Sleep(time.Duration(n) * time.Second)
 }
+
+func init() {
+	rand.NewSource(time.Now().UnixNano())
+}
+
+func RandomJitterSleep(minMs, maxMs int) {
+	randomMs := rand.Intn(maxMs-minMs+1) + minMs
+
+	time.Sleep(time.Duration(randomMs) * time.Millisecond)
+}

@@ -37,3 +37,17 @@ func IsJSON(s string) bool {
 	}
 	return json.Valid([]byte(s))
 }
+
+func Compress(v any) (out string, err error) {
+	byteBuf := bytes.NewBuffer([]byte{})
+	encoder := json.NewEncoder(byteBuf)
+	encoder.SetEscapeHTML(false) // 不转义特殊字符
+	encoder.SetIndent(constants.EmptyString, "")
+	err = encoder.Encode(v)
+	if err != nil {
+		return
+	}
+	out = byteBuf.String()
+	out = strings.TrimSpace(out)
+	return
+}

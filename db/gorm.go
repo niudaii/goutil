@@ -12,13 +12,6 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-func init() {
-	time.Local = cst
-}
-
-// 设置默认时区为 CST
-var cst = time.FixedZone("CST", 8*3600)
-
 func (c *Config) GormConfig(prefix string, singular bool) *gorm.Config {
 	config := &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
@@ -26,9 +19,6 @@ func (c *Config) GormConfig(prefix string, singular bool) *gorm.Config {
 			SingularTable: singular,
 		},
 		DisableForeignKeyConstraintWhenMigrating: true,
-		NowFunc: func() time.Time {
-			return time.Now().In(cst)
-		},
 	}
 	_default := logger.New(NewWriter(log.New(os.Stdout, "\r\n", log.LstdFlags), c.LogZap), logger.Config{
 		SlowThreshold: 200 * time.Millisecond,

@@ -62,7 +62,8 @@ func GormMysql(config Config) (db *gorm.DB, err error) {
 		DefaultStringSize:         191,
 		SkipInitializeWithVersion: false,
 	}
-	db, err = gorm.Open(mysql.New(mysqlConfig), config.GormConfig(config.Prefix, config.Singular))
+	db, err = gorm.Open(mysql.New(mysqlConfig), config.GormConfig(
+		config.Prefix, config.Singular))
 	return
 }
 

@@ -33,5 +33,16 @@ func FormatTimeToShanghai(t *time.Time) string {
 	if loc == nil {
 		loc = time.FixedZone("CST", 8*60*60)
 	}
-	return t.In(loc).Format("2006-01-02 15:04:05")
+	return t.In(loc).Format(time.DateTime)
+}
+
+func FormatDateToShanghai(t *time.Time) string {
+	if t == nil {
+		return ""
+	}
+	loc, _ := time.LoadLocation("Asia/Shanghai")
+	if loc == nil {
+		loc = time.FixedZone("CST", 8*60*60)
+	}
+	return t.In(loc).Format(time.DateOnly)
 }

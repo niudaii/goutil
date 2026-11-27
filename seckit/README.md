@@ -9,11 +9,12 @@ Independent Go submodule providing reusable HTTP client, OpenID Connect cookie a
 - `notify`: POPO Webhook and OpenAPI Robot notification clients with rune/UTF-8-byte message splitting, file upload with retry, and structured error logging + error return.
 - `oidc` & `oidc/ginoidc`: Stateless AES-256-GCM encrypted cookie OpenID Connect client supporting `net/http` and Gin, HS256 and RS256 (JWKS) ID token verification, strict origin/CSRF checks, `X-API-Key` validation, and bounded local revocation for logout/replay defense.
 - `serverx` & `serverx/ginserverx`: `signal.NotifyContext` graceful HTTP shutdown, independent `/healthz` probes, panic recovery, and security response headers distinguishing immutable hashed `/assets/*` from `no-store` HTML/API responses.
+- `ui` & `ui/ginui`: Shared SecOps Slate-Blue design tokens (`secops-tokens.css`), CSP-safe shell helpers (`secops-shell.js`: theme switcher, non-blocking toasts, clipboard copy, CVE links, `/` & `Esc` shortcuts, suite nav), env-configurable suite navigation (`/secops/nav.json`), and unified AuthGate login page template (`RenderAuthPage`).
 
 ## Installation
 
 Released as a Go submodule under tag `seckit/vX.Y.Z`:
 
 ```sh
-go get github.com/niudaii/goutil/seckit@v0.1.1
+go get github.com/niudaii/goutil/seckit@v0.2.0
 ```

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>{{.Title}}</title>
+  {{if .LogoURL}}<link rel="icon" href="{{.LogoURL}}" type="image/svg+xml">{{end}}
+  <link rel="stylesheet" href="{{.TokensCSSURL}}">
+  <script defer src="{{.ShellJSURL}}"></script>
+</head>
+<body class="secops-auth-body">
+  <main class="secops-auth-card">
+    {{if .LogoURL}}<img class="secops-auth-logo" src="{{.LogoURL}}" alt="" width="48" height="48">{{end}}
+    <h1>{{.Heading}}</h1>
+    {{if .Subtitle}}<p class="secops-auth-sub">{{.Subtitle}}</p>{{end}}
+    {{if .Message}}<p class="secops-auth-message" role="status">{{.Message}}</p>{{end}}
+    {{if .Error}}<div class="secops-auth-alert" role="alert">{{.Error}}</div>{{end}}
+    <div class="secops-auth-actions">
+      <a class="secops-btn secops-btn-primary" href="{{.LoginURL}}">{{.LoginLabel}}</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -15,5 +15,5 @@ Independent Go submodule providing reusable HTTP client, OpenID Connect cookie a
 Released as a Go submodule under tag `seckit/vX.Y.Z`:
 
 ```sh
-go get github.com/niudaii/goutil/seckit@v0.1.0
+go get github.com/niudaii/goutil/seckit@v0.1.1
 ```

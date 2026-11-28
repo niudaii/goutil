@@ -24,7 +24,7 @@ func TestRegisterRoutes(t *testing.T) {
 		path   string
 		marker string
 	}{
-		{ui.TokensCSSPath, "--primary: #3867e8"},
+		{ui.TokensCSSPath, "--primary: #2b59d9"},
 		{ui.ShellJSPath, "SecOps"},
 		{ui.NavJSONPath, `"current":"cves"`},
 	} {

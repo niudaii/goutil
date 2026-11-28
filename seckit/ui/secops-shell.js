@@ -309,6 +309,39 @@
     };
   }
 
+  function enhanceSearchInput(inputOrSelector, options) {
+    var input = resolveTarget(inputOrSelector);
+    if (!input) return function () {};
+    var opts = options || {};
+    var clearBtn = resolveTarget(opts.clearButton);
+    if (!clearBtn && input.parentElement) {
+      clearBtn = input.parentElement.querySelector('[data-secops-search-clear], .secops-search-clear');
+    }
+    var sync = function () {
+      if (clearBtn) clearBtn.hidden = !String(input.value || '').trim();
+    };
+    var onInput = function () {
+      sync();
+    };
+    var onClearClick = function () {
+      input.value = '';
+      sync();
+      if (typeof opts.onClear === 'function') {
+        opts.onClear();
+      } else {
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      if (typeof input.focus === 'function') input.focus();
+    };
+    input.addEventListener('input', onInput);
+    if (clearBtn) clearBtn.addEventListener('click', onClearClick);
+    sync();
+    return function () {
+      input.removeEventListener('input', onInput);
+      if (clearBtn) clearBtn.removeEventListener('click', onClearClick);
+    };
+  }
+
   function initThemeToggles() {
     var buttons = document.querySelectorAll('[data-secops-theme-toggle]');
     for (var i = 0; i < buttons.length; i++) {
@@ -349,9 +382,11 @@
     toggleTheme: toggleTheme,
     toast: toast,
     copy: copy,
+    copyIconSVG: copyIconSVG,
     cveUrl: cveUrl,
     createCveNode: createCveNode,
     mountNav: mountNav,
-    bindShortcuts: bindShortcuts
+    bindShortcuts: bindShortcuts,
+    enhanceSearchInput: enhanceSearchInput
   };
 })(window);
